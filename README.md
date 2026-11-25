@@ -44,7 +44,7 @@ GitHub Actions is configured to install dependencies from the lockfile and run t
 
 ## Research scope and citation
 
-The scenario definitions are executable in [the scenario matrix](tests/scenarios/run-scenario-matrix.mjs). This repository tests the rules in a controlled onboarding flow; it does not establish improved outcomes, disability detection, or accessibility conformance. The code here is a release candidate with later guidance and test changes. Do not treat its results as those of the original FYP evaluation. Cite the exact version or commit you used with [CITATION.cff](CITATION.cff).
+The scenario definitions are executable in [the scenario matrix](tests/scenarios/run-scenario-matrix.mjs). This repository tests the rules in a controlled onboarding flow; it does not establish improved outcomes, disability detection, or accessibility conformance. This repository contains a maintained version of the research prototype. Test results apply to the version or commit tested. Cite the exact version or commit you used with [CITATION.cff](CITATION.cff).
 
 ## Licence
 
