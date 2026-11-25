@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Local aggregate analysis for Pathfinder session reports.">
+    <title>Pathfinder Local Aggregate Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="src/analysis.js"></script>
+  </head>
+  <body class="analysis-page">
+    <a class="skip-link" href="#analysis-main">Skip to aggregate analysis</a>
+    <header class="site-header">
+      <div class="brand-block"><span class="brand-mark" aria-hidden="true">P</span><div><p class="eyebrow">Developer/research view</p><p class="brand-name">Pathfinder analysis</p></div></div>
+      <a class="secondary-link" href="index.html">Return to onboarding</a>
+    </header>
+    <main class="page-shell analysis-shell" id="analysis-main">
+      <section class="intro" aria-labelledby="analysis-title">
+        <p class="eyebrow">Local post-hoc analysis</p>
+        <h1 id="analysis-title">Compare privacy-minimised session reports.</h1>
+        <p class="intro-copy">Select exported Pathfinder JSON reports. Files are validated and analysed in this browser only; they are not uploaded or retained after the page is reloaded.</p>
+      </section>
+      <section class="analysis-card" aria-labelledby="import-title">
+        <h2 id="import-title">Import session reports</h2>
+        <label class="file-label" for="report-files">Select one or more JSON reports</label>
+        <input id="report-files" type="file" accept="application/json,.json" multiple>
+        <p class="field-hint">Malformed reports and reports that do not declare exclusion of form values will be rejected.</p>
+        <p id="import-status" role="status" aria-live="polite"></p>
+      </section>
+      <section class="analysis-card" id="aggregate-panel" aria-labelledby="aggregate-title" hidden>
+        <div class="report-heading"><div><p class="eyebrow">Aggregate result</p><h2 id="aggregate-title" tabindex="-1">Observable interaction evidence</h2></div></div>
+        <p class="report-notice">These counts identify recurring event patterns. They do not establish disability, confusion or a causal effect of the adaptive support.</p>
+        <dl class="report-summary" id="aggregate-summary"></dl>
+        <div class="aggregate-grids" id="aggregate-grids"></div>
+        <div class="report-actions no-print">
+          <button class="primary-button" id="print-aggregate-button" type="button">Print or save as PDF</button>
+          <button class="secondary-button" id="export-aggregate-button" type="button">Export CSV</button>
+          <button class="secondary-button" id="clear-aggregate-button" type="button">Clear imported reports</button>
+        </div>
+      </section>
+    </main>
+    <footer><p>Research prototype for controlled scenario testing.</p></footer>
+  </body>
+</html>

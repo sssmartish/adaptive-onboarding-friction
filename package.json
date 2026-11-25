@@ -1,0 +1,18 @@
+{
+  "name": "adaptive-onboarding-friction-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Client-side research prototype for a state-based onboarding interaction model.",
+  "engines": { "node": ">=22" },
+  "devDependencies": { "playwright": "1.62.1" },
+  "scripts": {
+    "start": "node scripts/server.mjs",
+    "test": "node --test tests/unit/*.test.mjs tests/integration/*.test.mjs",
+    "test:performance": "node tests/performance/state-engine-performance.mjs",
+    "test:scenarios": "node tests/scenarios/run-scenario-matrix.mjs",
+    "test:browser": "node tests/browser/run-browser-tests.mjs",
+    "example:reports": "node scripts/generate-example-reports.mjs",
+    "test:compatibility": "node tests/browser/compatibility-tests.mjs && node tests/browser/firefox-compatibility.mjs"
+  }
+}

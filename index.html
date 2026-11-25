@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Accessible onboarding prototype for evaluating a state-based interaction-friction model.">
+    <title>Pathfinder Onboarding Prototype</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#onboarding-form">Skip to the onboarding form</a>
+    <p class="visually-hidden" id="adaptive-announcer" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <header class="site-header">
+      <div class="brand-block">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <div>
+          <p class="eyebrow">Research prototype</p>
+          <p class="brand-name">Pathfinder onboarding</p>
+        </div>
+      </div>
+      <p class="header-note">Your entries stay in this browser session.</p>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Accessible account setup</p>
+        <h1 id="page-title">Set up your workspace, one clear step at a time.</h1>
+        <p class="intro-copy">This form demonstrates how recent validation and navigation events can trigger timely, task-focused guidance without inferring anything about the user.</p>
+      </section>
+
+      <div class="prototype-grid">
+        <section class="form-card" aria-labelledby="form-title">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow" id="step-counter">Step 1 of 5</p>
+              <h2 id="form-title">Create your account</h2>
+            </div>
+            <button class="text-button" id="reset-button" type="button">Reset session</button>
+          </div>
+
+            <nav class="progress-nav" aria-label="Onboarding progress">
+            <ol class="progress-list" id="progress-list">
+              <li data-step="1" aria-current="step"><span>1</span><small>Account</small></li>
+              <li data-step="2"><span>2</span><small>Profile</small></li>
+              <li data-step="3"><span>3</span><small>Goals</small></li>
+              <li data-step="4"><span>4</span><small>Preferences</small></li>
+              <li data-step="5"><span>5</span><small>Review</small></li>
+            </ol>
+            </nav>
+
+            <section class="mobile-support" aria-label="Current adaptive support">
+              <div class="mobile-support-heading">
+                <strong id="mobile-support-title">Standard guidance is active</strong>
+                <span class="state-badge" id="mobile-state-badge" data-state="stable">Standard support</span>
+              </div>
+              <p id="mobile-support-text">Complete the current step when you are ready.</p>
+              <button class="support-help-toggle" id="mobile-support-help-toggle" type="button" aria-expanded="false" aria-controls="mobile-support-help" hidden>Show step-by-step help</button>
+              <div class="support-help" id="mobile-support-help" hidden>
+                <h4 id="mobile-support-help-title">Step-by-step help</h4>
+                <ol id="mobile-support-help-steps"></ol>
+              </div>
+            </section>
+
+          <div class="error-summary" id="error-summary" role="region" aria-labelledby="error-summary-title" hidden>
+            <h3 id="error-summary-title">Review this item</h3>
+            <p id="error-summary-text"></p>
+          </div>
+
+          <form id="onboarding-form" tabindex="-1" novalidate>
+            <section class="form-step" data-step-panel="1" aria-labelledby="step-1-title">
+              <div class="step-copy">
+                <h3 id="step-1-title" tabindex="-1">Create your account</h3>
+                <p>Enter the details you will use for this demonstration.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="full-name">Full name <span aria-hidden="true">*</span></label>
+                <p class="field-hint" id="full-name-hint">Enter at least two characters.</p>
+                <input id="full-name" name="fullName" type="text" autocomplete="name" aria-describedby="full-name-hint full-name-error" required minlength="2">
+                <p class="field-error" id="full-name-error"></p>
+              </div>
+
+              <div class="field-group">
+                <label for="email">Email address <span aria-hidden="true">*</span></label>
+                <p class="field-hint" id="email-hint">Use a format such as name@example.com.</p>
+                <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-hint email-error" required>
+                <p class="field-error" id="email-error"></p>
+              </div>
+            </section>
+
+            <section class="form-step" data-step-panel="2" aria-labelledby="step-2-title" hidden>
+              <div class="step-copy">
+                <h3 id="step-2-title" tabindex="-1">Tell us about your role</h3>
+                <p>This information shapes the example setup summary.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="role">Primary role <span aria-hidden="true">*</span></label>
+                <p class="field-hint" id="role-hint">Choose the option that best matches your work.</p>
+                <select id="role" name="role" aria-describedby="role-hint role-error" required>
+                  <option value="">Select a role</option>
+                  <option value="Student">Student</option>
+                  <option value="Designer">Designer</option>
+                  <option value="Developer">Developer</option>
+                  <option value="Project manager">Project manager</option>
+                  <option value="Other">Other</option>
+                </select>
+                <p class="field-error" id="role-error"></p>
+              </div>
+
+              <div class="field-group">
+                <label for="organisation">Organisation or school</label>
+                <p class="field-hint" id="organisation-hint">Optional. This value is not added to the interaction log.</p>
+                <input id="organisation" name="organisation" type="text" autocomplete="organization" aria-describedby="organisation-hint">
+              </div>
+            </section>
+
+            <section class="form-step" data-step-panel="3" aria-labelledby="step-3-title" hidden>
+              <div class="step-copy">
+                <h3 id="step-3-title" tabindex="-1">Define your first goal</h3>
+                <p>Choose a focus and describe what a useful outcome looks like.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="primary-goal">Primary goal <span aria-hidden="true">*</span></label>
+                <select id="primary-goal" name="primaryGoal" aria-describedby="primary-goal-error" required>
+                  <option value="">Select a goal</option>
+                  <option value="Plan a project">Plan a project</option>
+                  <option value="Track learning">Track learning</option>
+                  <option value="Organise a team">Organise a team</option>
+                  <option value="Review progress">Review progress</option>
+                </select>
+                <p class="field-error" id="primary-goal-error"></p>
+              </div>
+
+              <div class="field-group">
+                <label for="outcome">What would success look like? <span aria-hidden="true">*</span></label>
+                <p class="field-hint" id="outcome-hint">Write at least 10 characters.</p>
+                <textarea id="outcome" name="outcome" rows="4" minlength="10" aria-describedby="outcome-hint outcome-error" required></textarea>
+                <p class="field-error" id="outcome-error"></p>
+              </div>
+            </section>
+
+            <section class="form-step" data-step-panel="4" aria-labelledby="step-4-title" hidden>
+              <div class="step-copy">
+                <h3 id="step-4-title" tabindex="-1">Choose your preferences</h3>
+                <p>Select a pace for the demonstration. You can still use every feature.</p>
+              </div>
+
+              <fieldset class="choice-group" aria-describedby="pace-error">
+                <legend>Setup pace <span aria-hidden="true">*</span></legend>
+                <label class="choice-card">
+                  <input type="radio" name="pace" value="Guided">
+                  <span><strong>Guided</strong><small>Show a short explanation at each stage.</small></span>
+                </label>
+                <label class="choice-card">
+                  <input type="radio" name="pace" value="Concise">
+                  <span><strong>Concise</strong><small>Keep supporting text brief.</small></span>
+                </label>
+                <p class="field-error" id="pace-error"></p>
+              </fieldset>
+
+              <label class="check-row">
+                <input type="checkbox" name="updates" value="Yes">
+                <span>Include optional progress reminders in the setup summary.</span>
+              </label>
+            </section>
+
+            <section class="form-step" data-step-panel="5" aria-labelledby="step-5-title" hidden>
+              <div class="step-copy">
+                <h3 id="step-5-title" tabindex="-1">Review your setup</h3>
+                <p>Check the summary before completing the demonstration.</p>
+              </div>
+
+              <dl class="review-list" id="review-list"></dl>
+
+              <div class="field-group confirmation-field">
+                <label class="check-row" for="confirmation">
+                  <input id="confirmation" name="confirmation" type="checkbox" aria-describedby="confirmation-error" required>
+                  <span>I have reviewed the information shown above. <span aria-hidden="true">*</span></span>
+                </label>
+                <p class="field-error" id="confirmation-error"></p>
+              </div>
+            </section>
+
+            <section class="completion-panel" id="completion-panel" tabindex="-1" hidden>
+              <span class="completion-icon" aria-hidden="true">OK</span>
+              <p class="eyebrow">Onboarding complete</p>
+              <h3>Your example workspace is ready.</h3>
+              <p>The demonstration finished successfully. No form value or interaction event was sent to a server.</p>
+              <div class="completion-actions">
+                <button class="secondary-button" id="start-again-button" type="button">Start another session</button>
+              </div>
+            </section>
+
+            <div class="form-actions" id="form-actions">
+              <button class="secondary-button" id="back-button" type="button" disabled>Back</button>
+              <button class="primary-button" id="continue-button" type="submit">Save and continue</button>
+            </div>
+          </form>
+
+          <p class="required-note"><span aria-hidden="true">*</span> Required field</p>
+        </section>
+
+        <aside class="support-card" aria-labelledby="support-title">
+          <div class="state-panel">
+          <div class="state-heading">
+            <div>
+              <p class="eyebrow">Adaptive support</p>
+              <h2 id="support-title">Current support</h2>
+            </div>
+            <span class="state-badge" id="state-badge" data-state="stable">Standard support</span>
+          </div>
+
+          <div class="support-message" id="support-message">
+            <h3 id="support-message-title">Standard guidance is active</h3>
+            <p id="support-message-text">Complete the current step when you are ready.</p>
+            <button class="support-help-toggle" id="support-help-toggle" type="button" aria-expanded="false" aria-controls="support-help" hidden>Show step-by-step help</button>
+            <div class="support-help" id="support-help" hidden>
+              <h4 id="support-help-title">Step-by-step help</h4>
+              <ol id="support-help-steps"></ol>
+            </div>
+          </div>
+
+          <div class="orientation-panel" id="orientation-panel">
+            <p class="orientation-label">Current position</p>
+            <p id="orientation-text">Step 1 of 5: Account</p>
+          </div>
+          </div>
+
+          <details class="trace-panel" id="decision-trace">
+            <summary>View decision trace</summary>
+            <p class="trace-note">Research/developer view. The trace records event categories only and never contains values entered in the form.</p>
+            <dl class="trace-grid">
+              <div><dt>Recent events</dt><dd id="trace-events">0 of 5</dd></div>
+              <div><dt>Scored evidence</dt><dd id="trace-evidence">0 of 5</dd></div>
+              <div><dt>Input errors (E)</dt><dd id="trace-errors">0</dd></div>
+              <div><dt>Navigation-loop evidence (L)</dt><dd id="trace-loops">0</dd></div>
+              <div><dt>Evidence score (S)</dt><dd id="trace-raw-score">0.0</dd></div>
+              <div id="trace-adjustment-row" hidden><dt>Override adjustment</dt><dd id="trace-adjustment">+0.0</dd></div>
+              <div id="trace-score-row" hidden><dt>Decision score (Se)</dt><dd id="trace-score">0.0</dd></div>
+              <div><dt>Matched rule</dt><dd id="trace-rule">Stable score range</dd></div>
+              <div><dt>Recovery status</dt><dd id="trace-recovery">No recovery action is required.</dd></div>
+              <div><dt>Accepted state</dt><dd id="trace-state">Stable</dd></div>
+            </dl>
+            <div class="event-strip" id="event-strip" aria-label="Recent event categories"></div>
+          </details>
+
+          <div class="privacy-panel">
+            <h3>Session privacy</h3>
+            <p>Only event type, step, direction, time and validation category are held temporarily in memory. Resetting or reloading clears the session.</p>
+          </div>
+
+          <details class="developer-panel">
+            <summary>Research/developer tools</summary>
+            <p>Generate a privacy-minimised report for this local session or analyse previously exported reports.</p>
+            <div class="developer-actions">
+              <button class="secondary-button compact-button" id="generate-report-button" type="button">Generate session report</button>
+              <a class="secondary-link" href="analysis.html">Open aggregate analysis</a>
+            </div>
+          </details>
+        </aside>
+      </div>
+
+      <section class="report-panel" id="session-report-panel" aria-labelledby="session-report-title" hidden>
+        <div class="report-heading">
+          <div>
+            <p class="eyebrow">Developer/research view</p>
+            <h2 id="session-report-title" tabindex="-1">Post-session interaction report</h2>
+          </div>
+          <button class="text-button no-print" id="close-report-button" type="button">Close report</button>
+        </div>
+        <p class="report-notice">This report contains semantic interaction categories and model decisions. It excludes all values entered in the form and makes no inference about disability or cognitive state.</p>
+        <dl class="report-summary" id="report-summary"></dl>
+        <h3>Event and decision sequence</h3>
+        <div class="table-scroll" tabindex="0" aria-label="Scrollable session-event table">
+          <table>
+            <thead><tr><th scope="col">#</th><th scope="col">Event</th><th scope="col">Step</th><th scope="col">State transition</th><th scope="col">Evidence score</th><th scope="col">Decision rule</th><th scope="col">Support</th></tr></thead>
+            <tbody id="report-events"></tbody>
+          </table>
+        </div>
+        <div class="report-actions no-print">
+          <button class="primary-button" id="print-report-button" type="button">Print or save as PDF</button>
+          <button class="secondary-button" id="export-report-button" type="button">Export JSON</button>
+          <a class="secondary-link" href="analysis.html">Analyse multiple reports</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Research prototype for controlled scenario testing.</p>
+    </footer>
+  </body>
+</html>
